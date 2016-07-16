@@ -7,7 +7,7 @@ if(isset($_SESSION["u_login"])&&($_SESSION["u_login"] != "")){
 						header("Location:admin_member.php");
 }
 ?>
-<!DOCTYPE html>
+<!DOCTYPE html>s
 <!-- Local bootstrap CSS & JS -->
 <link rel="stylesheet" media="screen" href="css/bootstrap.min.css">
 <link rel="stylesheet" media="screen" href="css/signin.css">

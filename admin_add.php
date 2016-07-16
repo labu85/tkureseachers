@@ -15,6 +15,27 @@ $datapool = mysqli_query($connect,$query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
+if(isset($_GET["action"]) && ($_GET["action"]=="edit") ){
+//pull user name
+$query_pullToEdit = "SELECT * FROM member WHERE username ='".$_GET["id"]."'";
+$datapool_edit = mysqli_query($connect,$query_pullToEdit);
+#pull data to vars
+$pull_edit = @mysqli_fetch_assoc($datapool_edit);
+$id       = $pull_edit["username"];
+$name     = $pull_edit["name"];
+$group    = $pull_edit["gid"];
+$email    = $pull_edit["email"];
+}
+if(isset($_GET["new_id"]) && $_GET["new_id"] != ""){
+$n_id    = $_GET["new_id"];
+$n_name  = $_GET["new_name"];
+$n_gid   = $_GET["new_gid"];
+$n_email = $_GET["new_email"];
+
+$query_update = sprintf("UPDATE member SET gid='%s',name='%s',email='%s' WHERE username='%s'",$n_gid,$n_name,$n_email,$n_id);
+mysqli_query($connect,$query_update);
+header("Location: admin_member.php");
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,14 +71,13 @@ $identity = $pull_all["name"];
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="index.html">Admin</a>
+               <a class="navbar-brand" href="admin_member.php">Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
                <li class="dropdown">
                   <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-envelope"></i> <b class="caret"></b></a>
                   <ul class="dropdown-menu message-dropdown">
-                     
                   </ul>
                </li>
                <li class="dropdown">
@@ -96,10 +116,7 @@ $identity = $pull_all["name"];
                            <a href="admin_member.php"><i class="fa fa-list-alt" aria-hidden="true"></i> Member List</a>
                         </li>
                         <li>
-                           <a href="admin_edit.php"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Member</a>
-                        </li>
-                        <li>
-                           <a href="admin_add.php"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a>
+                           <a href="admin_new.php"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a>
                         </li>
                      </ul>
                   </li>
@@ -135,19 +152,36 @@ $identity = $pull_all["name"];
                <!-- /.row -->
                <div class="row">
                   <div class="col-md-6">
-                     <form action="" method="POST" role="form">
+                     <form action="" method="GET" role="form">
                         <legend>Edit Data</legend>
                         <div class="form-group">
                            <label for="">ID</label>
-                           <input type="text" class="form-control" id="" value=""><br/>
+                           <?php 
+                              if(isset($_GET["action"])){?>
+                                 <input type="text" class="form-control" id="" name="new_id" value="<?php echo $id ?>"  readonly><br/>
+                           <?php }?>
+                           <?php if(!isset($_GET["action"])){?>
+                                 <input type="text" class="form-control" id="" value="" name="new_id"><br/>
+                           <?php }?>
                            <label for="">Name</label>
-                           <input type="text" class="form-control" id="" value=""><br/>
+                           <input type="text" class="form-control" id="" value="<?php if(isset($_GET["action"])) echo $name ?>" name="new_name"><br/>
                            <label for="">Group</label>
-                           <input type="text" class="form-control" id="" value=""><br/>
+                           <input type="text" class="form-control" id="" value="<?php if(isset($_GET["action"])) echo $group ?>" name="new_gid"><br/>
                            <label for="">E-Mail</label>
-                           <input type="text" class="form-control" id="" value=""><br/>
+                           <input type="text" class="form-control" id="" value="<?php if(isset($_GET["action"])) echo $email ?>" name="new_email"><br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
+                           <br/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Submit</button>
+                        <div align="right">
+                           <button type="submit" class="btn btn-success">Update</button>
+                           &nbsp;&nbsp;
+                           <button type="button" class="btn btn-danger" onclick="location.href='admin_member.php'">Abort</button>
+                        </div>
                      </form>
                   </div>
                </div>

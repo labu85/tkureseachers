@@ -1,3 +1,8 @@
+<?php 
+// todos
+// consider to change sql delete query from choosing id(username in sql)
+// to delete by No# (id in sql )
+ ?>
 <?php
 require_once('connect.php');
 session_start();
@@ -72,7 +77,7 @@ header("Location:admin_member.php");
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="index.html">Admin</a>
+               <a class="navbar-brand" href="admin_member.php">Admin</a>
             </div>
             <!-- Top Menu Items -->
             <ul class="nav navbar-right top-nav">
@@ -118,10 +123,7 @@ header("Location:admin_member.php");
                            <a href="admin_member.php"><i class="fa fa-list-alt" aria-hidden="true"></i> Member List</a>
                         </li>
                         <li>
-                           <a href="admin_edit.php"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Member</a>
-                        </li>
-                        <li>
-                           <a href="admin_add.php"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a>
+                           <a href="admin_new.php"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a>
                         </li>
                      </ul>
                   </li>
@@ -180,10 +182,10 @@ header("Location:admin_member.php");
                                  <td><?php echo $no; ?></td>
                                  <td><?php echo $pull_Admin['username'];?></td>
                                  <td><?php echo $pull_Admin['name'];?></td>
-                                 <td><?php echo $pull_Admin['name'];?></td>
+                                 <td><?php echo $pull_Admin['gid'];?></td>
                                  <td><?php echo $pull_Admin['email'];?></td>
                                  <td>
-                                    <a class="btn btn-success btn-xs" href="admin_edit.php?id=<?php echo $pull_Admin['username'] ?>" >Edit</a>
+                                    <a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_Admin['username'] ?>" >Edit</a>
                                     <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Admin['username'] ?>" onclick="return sure();">Delete</a>
                                  </td>
                               </tr><?php
@@ -218,10 +220,10 @@ header("Location:admin_member.php");
                                  <td><?php echo $no; ?></td>
                                  <td><?php echo $pull_User['username'];?></td>
                                  <td><?php echo $pull_User['name'];?></td>
-                                 <td><?php echo $pull_User['name'];?></td>
+                                 <td><?php echo $pull_User['gid'];?></td>
                                  <td><?php echo $pull_User['email'];?></td>
                                  <td>
-                                    <a class="btn btn-success btn-xs" href="admin_edit.php?id=<?php echo $pull_User['username'] ?>" >Edit</a>
+                                    <a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_User['username'] ?>" >Edit</a>
                                     <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_User['username'] ?>" onclick="return sure();">Delete</a>
                                     <!-- Modal -->
                                     <!--
@@ -276,10 +278,10 @@ header("Location:admin_member.php");
                                  <td><?php echo $no; ?></td>
                                  <td><?php echo $pull_Professor['username'];?></td>
                                  <td><?php echo $pull_Professor['name'];?></td>
-                                 <td><?php echo $pull_Professor['name'];?></td>
+                                 <td><?php echo $pull_Professor['gid'];?></td>
                                  <td><?php echo $pull_Professor['email'];?></td>
                                  <td>
-                                    <a class="btn btn-success btn-xs" href="admin_edit.php?id=<?php echo $pull_Professor['username'] ?>">Edit</a>
+                                    <a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_Professor['username'] ?>">Edit</a>
                                     <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Professor['username'] ?>" onclick="return sure();">Delete</a>
                                  </td>
                               </tr><?php
