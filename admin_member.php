@@ -22,11 +22,16 @@ $datapool_Admin = mysqli_query($connect,$query_Admin);
 // Pull professor
 $query_Professor = "SELECT * FROM member WHERE gid = '1'";
 $datapool_Professor = mysqli_query($connect,$query_Professor);
-$pull_Professor = @mysqli_fetch_assoc($query_Professor);
 // Pull user
 $query_User = "SELECT * FROM member WHERE gid = '0'";
 $datapool_User = mysqli_query($connect,$query_User);
-$pull_User = @mysqli_fetch_assoc($query_User);
+//delete member
+if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
+   $query_DelMember = "DELETE FROM member WHERE username='".$_GET["id"]."'";
+   mysqli_query($connect,$query_DelMember);
+   header("Location:admin_member.php");
+}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -49,6 +54,12 @@ $pull_User = @mysqli_fetch_assoc($query_User);
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+      <script type="text/javascript">
+         function sure(){
+            if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return ttrue;
+            else false ;
+         }
+      </script>>
    </head>
    <body>
       <div id="wrapper">
@@ -172,8 +183,8 @@ $pull_User = @mysqli_fetch_assoc($query_User);
                                  <td><?php echo $pull_Admin['name'];?></td>
                                  <td><?php echo $pull_Admin['email'];?></td>
                                  <td>
-                                    <a class="btn btn-success btn-xs" href="#" role="button">Edit</a>
-                                    <a class="btn btn-danger btn-xs" href="#" role="button">Delete</a>
+                                    <a class="btn btn-success btn-xs" href="admin_edit.php?id=<?php echo $pull_Admin['username'] ?>" >Edit</a>
+                                    <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Admin['username'] ?>" onclick="return sure();">Delete</a>
                                  </td>
                               </tr><?php
                               //HTML表格列的結束標記
@@ -200,17 +211,34 @@ $pull_User = @mysqli_fetch_assoc($query_User);
                            <tbody>
                               <?php
                               //進入第一層迴圈
-                              while($pull_Admin = @mysqli_fetch_assoc($datapool_User)){?>
+                              while($pull_User = @mysqli_fetch_assoc($datapool_User)){?>
                               <tr>
                                  <!--建立HTML表格的列-->
                                  <td>1</td>
-                                 <td><?php echo $pull_Admin['username'];?></td>
-                                 <td><?php echo $pull_Admin['name'];?></td>
-                                 <td><?php echo $pull_Admin['name'];?></td>
-                                 <td><?php echo $pull_Admin['email'];?></td>
+                                 <td><?php echo $pull_User['username'];?></td>
+                                 <td><?php echo $pull_User['name'];?></td>
+                                 <td><?php echo $pull_User['name'];?></td>
+                                 <td><?php echo $pull_User['email'];?></td>
                                  <td>
-                                    <a class="btn btn-success btn-xs" href="#" role="button">Edit</a>
-                                    <a class="btn btn-danger btn-xs" href="#" role="button">Delete</a>
+                                    <a class="btn btn-success btn-xs" href="admin_edit.php?id=<?php echo $pull_User['username'] ?>" >Edit</a>
+                                    <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_User['username'] ?>" onclick="return sure();">Delete</a>
+                                    <!-- Modal -->
+                                    <!--
+                                    <div class="modal fade" id="myModal" role="dialog">
+                                       <div class="modal-dialog modal-sm">
+                                          <div class="modal-content">
+                                             <div class="modal-body">
+                                                <p>Are you sure to delete</p>
+                                             </div>
+                                             <div class="modal-footer">
+                                                <a type="button" class="btn btn-danger" href="admin_member.php?del=--><?php //print $pull_User['username'] ?><!--">Yes</a>
+                                                <button type="button" class="btn btn-success" data-dismiss="modal">No</button>
+                                             </div>
+                                          </div>
+                                       </div>
+                                    </div>
+                                    -->
+                                    <!-- Modal -->
                                  </td>
                               </tr><?php
                               //HTML表格列的結束標記
@@ -240,17 +268,17 @@ $pull_User = @mysqli_fetch_assoc($query_User);
                            <tbody>
                               <?php
                               //進入第一層迴圈
-                              while($pull_Admin = @mysqli_fetch_assoc($datapool_Professor)){?>
+                              while($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)){?>
                               <tr>
                                  <!--建立HTML表格的列-->
                                  <td>1</td>
-                                 <td><?php echo $pull_Admin['username'];?></td>
-                                 <td><?php echo $pull_Admin['name'];?></td>
-                                 <td><?php echo $pull_Admin['name'];?></td>
-                                 <td><?php echo $pull_Admin['email'];?></td>
+                                 <td><?php echo $pull_Professor['username'];?></td>
+                                 <td><?php echo $pull_Professor['name'];?></td>
+                                 <td><?php echo $pull_Professor['name'];?></td>
+                                 <td><?php echo $pull_Professor['email'];?></td>
                                  <td>
-                                    <a class="btn btn-success btn-xs" href="#" role="button">Edit</a>
-                                    <a class="btn btn-danger btn-xs" href="#" role="button">Delete</a>
+                                    <a class="btn btn-success btn-xs" href="admin_edit.php?id=<?php echo $pull_Professor['username'] ?>">Edit</a>
+                                    <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Professor['username'] ?>" onclick="return sure();">Delete</a>
                                  </td>
                               </tr><?php
                               //HTML表格列的結束標記
