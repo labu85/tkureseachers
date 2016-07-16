@@ -172,11 +172,12 @@ header("Location:admin_member.php");
                            </thead>
                            <tbody>
                               <?php
+                              $no = 0;
                               //進入第一層迴圈
-                              while($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)){?>
+                              while($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)){ $no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
-                                 <td>1</td>
+                                 <td><?php echo $no; ?></td>
                                  <td><?php echo $pull_Admin['username'];?></td>
                                  <td><?php echo $pull_Admin['name'];?></td>
                                  <td><?php echo $pull_Admin['name'];?></td>
@@ -209,11 +210,12 @@ header("Location:admin_member.php");
                            </thead>
                            <tbody>
                               <?php
+                              $no = 0;
                               //進入第一層迴圈
-                              while($pull_User = @mysqli_fetch_assoc($datapool_User)){?>
+                              while($pull_User = @mysqli_fetch_assoc($datapool_User)){ $no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
-                                 <td>1</td>
+                                 <td><?php echo $no; ?></td>
                                  <td><?php echo $pull_User['username'];?></td>
                                  <td><?php echo $pull_User['name'];?></td>
                                  <td><?php echo $pull_User['name'];?></td>
@@ -266,11 +268,12 @@ header("Location:admin_member.php");
                            </thead>
                            <tbody>
                               <?php
+                              $no = 0;
                               //進入第一層迴圈
-                              while($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)){?>
+                              while($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)){ $no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
-                                 <td>1</td>
+                                 <td><?php echo $no; ?></td>
                                  <td><?php echo $pull_Professor['username'];?></td>
                                  <td><?php echo $pull_Professor['name'];?></td>
                                  <td><?php echo $pull_Professor['name'];?></td>
