@@ -1,0 +1,13 @@
+body {
+  padding-top: 40px;
+  padding-bottom: 40px;
+  background-color: #eee;
+}
+.warning{
+	color:red;
+}
+.form-signin {
+    max-width: 380px;
+    padding: 5px;
+    margin: 0 auto;
+}
