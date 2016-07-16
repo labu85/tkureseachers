@@ -55,8 +55,8 @@ header("Location:admin_member.php");
       <![endif]-->
       <script type="text/javascript">
       function sure(){
-      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return ttrue;
-      else false ;
+      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
+      return false ;
       }
       </script>>
    </head>
