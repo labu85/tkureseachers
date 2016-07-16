@@ -27,11 +27,10 @@ $query_User = "SELECT * FROM member WHERE gid = '0'";
 $datapool_User = mysqli_query($connect,$query_User);
 //delete member
 if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
-   $query_DelMember = "DELETE FROM member WHERE username='".$_GET["id"]."'";
-   mysqli_query($connect,$query_DelMember);
-   header("Location:admin_member.php");
+$query_DelMember = "DELETE FROM member WHERE username='".$_GET["id"]."'";
+mysqli_query($connect,$query_DelMember);
+header("Location:admin_member.php");
 }
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -55,10 +54,10 @@ if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
       <script type="text/javascript">
-         function sure(){
-            if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return ttrue;
-            else false ;
-         }
+      function sure(){
+      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return ttrue;
+      else false ;
+      }
       </script>>
    </head>
    <body>
@@ -119,10 +118,10 @@ if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
                            <a href="admin_member.php"><i class="fa fa-list-alt" aria-hidden="true"></i> Member List</a>
                         </li>
                         <li>
-                           <a href="#"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Member</a>
+                           <a href="admin_edit.php"><i class="fa fa-pencil" aria-hidden="true"></i> Edit Member</a>
                         </li>
                         <li>
-                           <a href="#"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a>
+                           <a href="admin_add.php"><i class="fa fa-plus" aria-hidden="true"></i> Add Member</a>
                         </li>
                      </ul>
                   </li>
@@ -195,7 +194,7 @@ if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
                      </div>
                   </div>
                   <div class="col-lg-6">
-                     <h2>Bordered with Striped Rows</h2>
+                     <h2>User Account</h2>
                      <div class="table-responsive">
                         <table class="table table-bordered table-hover table-striped">
                            <thead>
@@ -252,7 +251,7 @@ if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
                <!-- /.row -->
                <div class="row">
                   <div class="col-lg-6">
-                     <h2>Basic Table</h2>
+                     <h2>Professor Account</h2>
                      <div class="table-responsive">
                         <table class="table table-bordered table-hover table-striped">
                            <thead>
