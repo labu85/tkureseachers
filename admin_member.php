@@ -58,7 +58,7 @@ header("Location:admin_member.php");
       if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
       return false ;
       }
-      </script>>
+      </script>
    </head>
    <body>
       <div id="wrapper">
