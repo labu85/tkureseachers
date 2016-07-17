@@ -110,7 +110,7 @@ header("Location: admin_member.php");
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                <ul class="nav navbar-nav side-nav">
                   <li class="active">
-                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-users"></i> Member Manager <i class="fa fa-fw fa-caret-down"></i></a>
+                     <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user-md"></i> Member Manager <i class="fa fa-fw fa-caret-down"></i></a>
                      <ul id="demo" class="collapse">
                         <li>
                            <a href="admin_member.php"><i class="fa fa-list-alt" aria-hidden="true"></i> Member List</a>
@@ -121,10 +121,13 @@ header("Location: admin_member.php");
                      </ul>
                   </li>
                   <li>
-                     <a href="#"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
+                     <a href="group_setting.php"><i class="fa fa-users" aria-hidden="true"></i> Group Manage</a>
                   </li>
                   <li>
-                     <a href="#"><i class="fa fa-fw fa-table"></i> Tables</a>
+                     <a href="#"><i class="fa fa-file" aria-hidden="true"></i> Files</a>
+                  </li>
+                  <li>
+                     <a href="#"><i class="fa fa-area-chart" aria-hidden="true"></i> Score</a>
                   </li>
                </ul>
             </div>

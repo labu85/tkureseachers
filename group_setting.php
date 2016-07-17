@@ -1,5 +1,5 @@
 <?php
-///////////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////////////////////////////////////////
 require_once('connect.php');
 session_start();
 if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="") || ($_SESSION["Level"] != "99")){
@@ -16,25 +16,7 @@ $datapool = mysqli_query($connect,$query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
-///////////////////////////////////////////////////////////////
-function makePass($length){
-$conbination = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-$str = "";
-while(strlen($str)<$length){
-$str .= substr($conbination,rand(0,strlen($conbination)),1);
-}
-return ($str);
-}
-///////////////////////////////////////////////////////////////
-if(isset($_GET["new_id"]) && $_GET["new_id"] != ""){
-$n_id    = $_GET["new_id"];
-$n_name  = $_GET["new_name"];
-$n_gid   = $_GET["new_gid"];
-$n_email = $_GET["new_email"];
-$query_insert = sprintf("INSERT INTO member (username,pwd,name,email,gid) VALUES ('%s','%s','%s','%s','%s')",$n_id,md5(makePass(15)),$n_name,$n_email,$n_gid);
-mysqli_query($connect,$query_insert);
-header("Location: admin_member.php");
-}
+//////////////////////////////////////////////////////////////////////////////////////////////////
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -57,6 +39,12 @@ header("Location: admin_member.php");
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
+      <script type="text/javascript">
+      function sure(){
+      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
+      return false ;
+      }
+      </script>
    </head>
    <body>
       <div id="wrapper">
@@ -108,7 +96,7 @@ header("Location: admin_member.php");
             <!-- Sidebar Menu Items - These collapse to the responsive navigation menu on small screens -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                <ul class="nav navbar-nav side-nav">
-                  <li class="active">
+                  <li >
                      <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-user-md"></i> Member Manager <i class="fa fa-fw fa-caret-down"></i></a>
                      <ul id="demo" class="collapse">
                         <li>
@@ -119,7 +107,7 @@ header("Location: admin_member.php");
                         </li>
                      </ul>
                   </li>
-                  <li>
+                  <li class="active">
                      <a href="group_setting.php"><i class="fa fa-users" aria-hidden="true"></i> Group Manage</a>
                   </li>
                   <li>
@@ -151,38 +139,20 @@ header("Location: admin_member.php");
                      </ol>
                   </div>
                </div>
-               <!-- /.row -->
-               <div class="row">
-                  <div class="col-md-6">
-                     <form action="" method="GET" role="form">
-                        <legend>Edit Data</legend>
-                        <div class="form-group">
-                           <label for="">ID</label>
-                           <input type="text" class="form-control" id="" value="" name="new_id"><br/>
-                           <label for="">Name</label>
-                           <input type="text" class="form-control" id="" name="new_name"><br/>
-                           <label for="">Group</label>
-                           <input type="text" class="form-control" id="" name="new_gid"><br/>
-                           <label for="">E-Mail</label>
-                           <input type="text" class="form-control" id="" name="new_email"><br/>
-                           <br/>
-                           <br/>
-                           <br/>
-                           <br/>
-                           <br/>
-                           <br/>
-                           <br/>
-                        </div>
-                        <div align="right">
-                           <button type="submit" class="btn btn-success">Add Member</button>
-                           &nbsp;&nbsp;
-                           <button type="button" class="btn btn-danger" onclick="location.href='admin_member.php'">Abort</button>
-                        </div>
-                     </form>
-                  </div>
-               </div>
             </div>
             <!-- /.container-fluid -->
+            <div class="row">
+               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                  <form action="" method="POST" role="form">
+                     <legend>Form title</legend>
+                     <div class="form-group">
+                        <label for="">label</label>
+                        <input type="text" class="form-control" id="" placeholder="Input field">
+                     </div>
+                     <button type="submit" class="btn btn-primary">Submit</button>
+                  </form>
+               </div>
+            </div>
          </div>
          <!-- /#page-wrapper -->
       </div>
