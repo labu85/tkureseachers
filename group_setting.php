@@ -1,18 +1,18 @@
 <?php
 //////////////////////////////////////////////////////////////////////////////////////////////////
-require_once('connect.php');
+require_once 'connect.php';
 session_start();
-if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="") || ($_SESSION["Level"] != "99")){
-header("Location:index.php");
+if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "") || ($_SESSION["Level"] != "99")) {
+   header("Location:index.php");
 }
-if(isset($_GET["logout"]) && ($_GET["logout"] == "true")){
-unset($_SESSION["u_login"]);
-unset($_SESSION["Level"]);
-header("Location:index.php");
+if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
+   unset($_SESSION["u_login"]);
+   unset($_SESSION["Level"]);
+   header("Location:index.php");
 }
 //pull user name
-$query_pullMember = "SELECT * FROM member WHERE username ='".$_SESSION["u_login"]."';";
-$datapool = mysqli_query($connect,$query_pullMember);
+$query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
+$datapool = mysqli_query($connect, $query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
@@ -39,13 +39,6 @@ $identity = $pull_all["name"];
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
       <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
       <![endif]-->
-      <script type="text/javascript">
-      function sure(){
-      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
-      return false ;
-      }
-      </script>
-   </head>
    <body>
       <div id="wrapper">
          <!-- Navigation -->
@@ -126,8 +119,7 @@ $identity = $pull_all["name"];
                <div class="row">
                   <div class="col-lg-12">
                      <h1 class="page-header">
-                     Member Manage
-                     <small>All Members</small>
+                     Group Settings
                      </h1>
                      <ol class="breadcrumb">
                         <li>
@@ -142,13 +134,18 @@ $identity = $pull_all["name"];
             </div>
             <!-- /.container-fluid -->
             <div class="row">
-               <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                  <form action="" method="POST" role="form">
-                     <legend>Form title</legend>
-                     <div class="form-group">
-                        <label for="">label</label>
-                        <input type="text" class="form-control" id="" placeholder="Input field">
-                     </div>
+               <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+                  <h3>Group Setting</h3>
+                  <form role="form">
+                     <form action="" method="POST" role="form">
+                        <div class="form-group">
+                           <label for="">Group Numbers</label>
+                           <input type="text" class="form-control" id="" placeholder="Input field">
+                           <br/>
+                           <label for="">People in Groups</label>
+                           <input type="text" class="form-control" id="" placeholder="Input field">
+                        </div>
+                     </form>
                      <button type="submit" class="btn btn-primary">Submit</button>
                   </form>
                </div>

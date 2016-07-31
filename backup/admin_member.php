@@ -4,37 +4,37 @@
 // to delete by No# (id in sql )
 ?>
 <?php
-require_once('connect.php');
+require_once 'connect.php';
 session_start();
-if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="") || ($_SESSION["Level"] != "99")){
-header("Location:index.php");
+if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "") || ($_SESSION["Level"] != "99")) {
+	header("Location:index.php");
 }
-if(isset($_GET["logout"]) && ($_GET["logout"] == "true")){
-unset($_SESSION["u_login"]);
-unset($_SESSION["Level"]);
-header("Location:index.php");
+if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
+	unset($_SESSION["u_login"]);
+	unset($_SESSION["Level"]);
+	header("Location:index.php");
 }
 //pull user name
-$query_pullMember = "SELECT * FROM member WHERE username ='".$_SESSION["u_login"]."';";
-$datapool = mysqli_query($connect,$query_pullMember);
+$query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
+$datapool = mysqli_query($connect, $query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
 // Pull admin
 $query_Admin = "SELECT * FROM member WHERE gid = '99'";
-$datapool_Admin = mysqli_query($connect,$query_Admin);
+$datapool_Admin = mysqli_query($connect, $query_Admin);
 // $pull_Admin = @mysqli_fetch_assoc($query_Admin);
 // Pull professor
 $query_Professor = "SELECT * FROM member WHERE gid = '1'";
-$datapool_Professor = mysqli_query($connect,$query_Professor);
+$datapool_Professor = mysqli_query($connect, $query_Professor);
 // Pull user
 $query_User = "SELECT * FROM member WHERE gid = '0'";
-$datapool_User = mysqli_query($connect,$query_User);
+$datapool_User = mysqli_query($connect, $query_User);
 //delete member
-if(isset($_GET["action"]) && ($_GET["action"] == "delete")){
-$query_DelMember = "DELETE FROM member WHERE username='".$_GET["id"]."'";
-mysqli_query($connect,$query_DelMember);
-header("Location:admin_member.php");
+if (isset($_GET["action"]) && ($_GET["action"] == "delete")) {
+	$query_DelMember = "DELETE FROM member WHERE username='" . $_GET["id"] . "'";
+	mysqli_query($connect, $query_DelMember);
+	header("Location:admin_member.php");
 }
 ?>
 <!DOCTYPE html>
@@ -176,24 +176,26 @@ header("Location:admin_member.php");
                            </thead>
                            <tbody>
                               <?php
-                              $no = 0;
-                              //進入第一層迴圈
-                              while($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)){ $no++;?>
+   $no = 0;
+//進入第一層迴圈
+while ($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)) {$no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
                                  <td><?php echo $no; ?></td>
-                                 <td><?php echo $pull_Admin['username'];?></td>
-                                 <td><?php echo $pull_Admin['name'];?></td>
-                                 <td><?php echo $pull_Admin['gid'];?></td>
-                                 <td><?php echo $pull_Admin['email'];?></td>
+                                 <td><?php echo $pull_Admin['username']; ?></td>
+                                 <td><?php echo $pull_Admin['name']; ?></td>
+                                 <td><?php echo $pull_Admin['gid']; ?></td>
+                                 <td><?php echo $pull_Admin['email']; ?></td>
                                  <td>
                                     <a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_Admin['username'] ?>" >Edit</a>
                                     <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Admin['username'] ?>" onclick="return sure();">Delete</a>
                                  </td>
-                              </tr><?php
-                              //HTML表格列的結束標記
-                              };//第一層迴圈結束
-                              ?>
+                              </tr>
+                              <?php
+//HTML表格列的結束標記
+}
+; //第一層迴圈結束
+?>
                            </tbody>
                         </table>
                      </div>
@@ -216,14 +218,14 @@ header("Location:admin_member.php");
                               <?php
                               $no = 0;
                               //進入第一層迴圈
-                              while($pull_User = @mysqli_fetch_assoc($datapool_User)){ $no++;?>
+                              while ($pull_User = @mysqli_fetch_assoc($datapool_User)) {$no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
                                  <td><?php echo $no; ?></td>
-                                 <td><?php echo $pull_User['username'];?></td>
-                                 <td><?php echo $pull_User['name'];?></td>
-                                 <td><?php echo $pull_User['gid'];?></td>
-                                 <td><?php echo $pull_User['email'];?></td>
+                                 <td><?php echo $pull_User['username']; ?></td>
+                                 <td><?php echo $pull_User['name']; ?></td>
+                                 <td><?php echo $pull_User['gid']; ?></td>
+                                 <td><?php echo $pull_User['email']; ?></td>
                                  <td>
                                     <a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_User['username'] ?>" >Edit</a>
                                     <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_User['username'] ?>" onclick="return sure();">Delete</a>
@@ -246,9 +248,10 @@ header("Location:admin_member.php");
                                     <!-- Modal -->
                                  </td>
                               </tr><?php
-                              //HTML表格列的結束標記
-                              };//第一層迴圈結束
-                              ?>
+                           //HTML表格列的結束標記
+                           }
+                           ; //第一層迴圈結束
+                           ?>
                            </tbody>
                         </table>
                      </div>
@@ -272,24 +275,25 @@ header("Location:admin_member.php");
                            </thead>
                            <tbody>
                               <?php
-                              $no = 0;
-                              //進入第一層迴圈
-                              while($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)){ $no++;?>
+$no = 0;
+//進入第一層迴圈
+while ($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)) {$no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
                                  <td><?php echo $no; ?></td>
-                                 <td><?php echo $pull_Professor['username'];?></td>
-                                 <td><?php echo $pull_Professor['name'];?></td>
-                                 <td><?php echo $pull_Professor['gid'];?></td>
-                                 <td><?php echo $pull_Professor['email'];?></td>
+                                 <td><?php echo $pull_Professor['username']; ?></td>
+                                 <td><?php echo $pull_Professor['name']; ?></td>
+                                 <td><?php echo $pull_Professor['gid']; ?></td>
+                                 <td><?php echo $pull_Professor['email']; ?></td>
                                  <td>
                                     <a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_Professor['username'] ?>">Edit</a>
                                     <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Professor['username'] ?>" onclick="return sure();">Delete</a>
                                  </td>
                               </tr><?php
-                              //HTML表格列的結束標記
-                              };//第一層迴圈結束
-                              ?>
+//HTML表格列的結束標記
+}
+; //第一層迴圈結束
+?>
                            </tbody>
                         </table>
                      </div>

@@ -1,39 +1,39 @@
 <?php
 ///////////////////////////////////////////////////////////////
-require_once('connect.php');
+require_once 'connect.php';
 session_start();
-if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="") || ($_SESSION["Level"] != "99")){
-header("Location:index.php");
+if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "") || ($_SESSION["Level"] != "99")) {
+	header("Location:index.php");
 }
-if(isset($_GET["logout"]) && ($_GET["logout"] == "true")){
-unset($_SESSION["u_login"]);
-unset($_SESSION["Level"]);
-header("Location:index.php");
+if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
+	unset($_SESSION["u_login"]);
+	unset($_SESSION["Level"]);
+	header("Location:index.php");
 }
 //pull user name
-$query_pullMember = "SELECT * FROM member WHERE username ='".$_SESSION["u_login"]."';";
-$datapool = mysqli_query($connect,$query_pullMember);
+$query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
+$datapool = mysqli_query($connect, $query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
 ///////////////////////////////////////////////////////////////
-function makePass($length){
-$conbination = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-$str = "";
-while(strlen($str)<$length){
-$str .= substr($conbination,rand(0,strlen($conbination)),1);
-}
-return ($str);
+function makePass($length) {
+	$conbination = "0123456789abcdefghijklmnopqrstuvwxyz!@#$%&ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+	$str = "";
+	while (strlen($str) < $length) {
+		$str .= substr($conbination, rand(0, strlen($conbination)), 1);
+	}
+	return ($str);
 }
 ///////////////////////////////////////////////////////////////
-if(isset($_GET["new_id"]) && $_GET["new_id"] != ""){
-$n_id    = $_GET["new_id"];
-$n_name  = $_GET["new_name"];
-$n_gid   = $_GET["new_gid"];
-$n_email = $_GET["new_email"];
-$query_insert = sprintf("INSERT INTO member (username,pwd,name,email,gid) VALUES ('%s','%s','%s','%s','%s')",$n_id,md5(makePass(15)),$n_name,$n_email,$n_gid);
-mysqli_query($connect,$query_insert);
-header("Location: admin_member.php");
+if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
+	$n_id = $_GET["new_id"];
+	$n_name = $_GET["new_name"];
+	$n_gid = $_GET["new_gid"];
+	$n_email = $_GET["new_email"];
+	$query_insert = sprintf("INSERT INTO member (username,pwd,name,email,gid) VALUES ('%s','%s','%s','%s','%s')", $n_id, md5(makePass(15)), $n_name, $n_email, $n_gid);
+	mysqli_query($connect, $query_insert);
+	header("Location: admin_member.php");
 }
 ?>
 <!DOCTYPE html>
