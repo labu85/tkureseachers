@@ -15,26 +15,7 @@ $datapool = mysqli_query($connect, $query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
-if (isset($_GET["action"]) && ($_GET["action"] == "edit")) {
-//pull user name
-   $query_pullToEdit = "SELECT * FROM member WHERE username ='" . $_GET["id"] . "'";
-   $datapool_edit = mysqli_query($connect, $query_pullToEdit);
-#pull data to vars
-   $pull_edit = @mysqli_fetch_assoc($datapool_edit);
-   $id = $pull_edit["username"];
-   $name = $pull_edit["name"];
-   $group = $pull_edit["gid"];
-   $email = $pull_edit["email"];
-}
-if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
-   $n_id = $_GET["new_id"];
-   $n_name = $_GET["new_name"];
-   $n_gid = $_GET["new_gid"];
-   $n_email = $_GET["new_email"];
-   $query_update = sprintf("UPDATE member SET gid='%s',name='%s',email='%s' WHERE username='%s'", $n_gid, $n_name, $n_email, $n_id);
-   mysqli_query($connect, $query_update);
-   header("Location: admin.php");
-}
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
