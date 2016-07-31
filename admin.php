@@ -158,7 +158,7 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 								<div class="list-group">
 									<a href="admin.php" class="list-group-item"> <i class="fa fa-user-md" aria-hidden="true"></i> Member</a>
 									<a href="admin_group.php" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Group</a>
-									<a href="admim_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
+									<a href="admin_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
 									<a href="admin_score.php" class="list-group-item"><i class="fa fa-area-chart" aria-hidden="true"></i> Score</a>
 								</div>
 							</div>
