@@ -39,12 +39,6 @@ $identity = $pull_all["name"];
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
    <![endif]-->   
-   <script type="text/javascript">
-      function sure(){
-      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
-      return false ;
-      }
-      </script>
    </head>
    <body>
       <nav class="navbar navbar-default" role="navigation">
@@ -118,7 +112,7 @@ $identity = $pull_all["name"];
                         <div class="list-group">
                            <a href="admin.php" class="list-group-item"> <i class="fa fa-user-md" aria-hidden="true"></i> Member</a>
                            <a href="admin_group.php" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Group</a>
-                           <a href="admim_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
+                           <a href="admin_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
                            <a href="admin_score.php" class="list-group-item"><i class="fa fa-area-chart" aria-hidden="true"></i> Score</a>
                         </div>
                      </div>
