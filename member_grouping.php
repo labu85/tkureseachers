@@ -1,3 +1,8 @@
+<?php 
+// todo
+// There are many redundant sql query maybe can do it all by one time ex pre-process
+// 
+?>
 <?php
 require_once('connect.php');
 session_start();
@@ -15,16 +20,62 @@ $datapool = mysqli_query($connect,$query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
+$my_id = $pull_all["username"];
 $pkey = $pull_all["id"];
 $project_name = $pull_all["p_name"];
+$my_group = $pull_all["gup_number"];
+//lmao who am i lmao
+//# whoami
+//>_CHEN MING TSE 
+//any questions?
+$whoami = $pull_all["is_leader"];
 if($project_name != ""){
    $project_isset = 1;
 }else $project_isset = 0;
+//////////////////////////////////////////////////////////
 if(isset($_GET["action"]) && $_GET["action"] == "new" ){
    $query_insert = "UPDATE member SET p_name = '".$_GET["pname"]."' , is_leader = '1' WHERE id ='".$pkey."'";
-      mysqli_query($connect,$query_insert);
+   mysqli_query($connect,$query_insert);
+      ///assign group/////////////////////////////////////////////////////////////////////
+      $query_getindex = "SELECT * FROM member WHERE gup_number != 0";
+      $index = mysqli_query($connect,$query_getindex);
+      $row = mysqli_num_rows($index);
+      $assign_gnum = ++$row;
+      $query_setgroup = "UPDATE member SET gup_number ='".$assign_gnum."' WHERE id ='".$pkey."'";
+      mysqli_query($connect,$query_setgroup);
+      /////////////////////////////////////////////////////////////////////////////////////
+   $query_project_regist = "INSERT INTO project (project_name) VALUES ('".$_GET["pname"]."')";
+      mysqli_query($connect,$query_project_regist);
       header("Location:member_grouping.php");
 }
+//////////////////////////////////////////////////////////
+$Errlevel = -1;
+if(isset($_GET["membername"]) && $_GET["membername"] != ""){
+   if(isset($_GET["action"]) && $_GET["action"] == "addmember" ){
+      $query_get = "SELECT * FROM member WHERE username ='".$_GET["membername"]."'";
+      $result = mysqli_query($connect,$query_get);
+         if(mysqli_num_rows($result) > 0){
+            $Errlevel = 0;
+            $query_setgroupuser = "UPDATE member SET gup_number ='".$my_group."' WHERE username ='".$_GET["membername"]."'";
+            $query_setgroupproject = "UPDATE member SET p_name ='".$project_name."' WHERE username ='".$_GET["membername"]."'";
+            mysqli_query($connect,$query_setgroupuser);
+            mysqli_query($connect,$query_setgroupproject);
+            header("Location:member_grouping.php");
+         }else{
+            $Errlevel = 1;
+      }
+   }
+}else $Errlevel = 1;
+if(!isset($_GET["membername"]))
+   $Errlevel = -1;
+//////////////////////////////////////////////////////////
+if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
+   $query_delete = "UPDATE member SET gup_number = '0' WHERE username ='".$_GET["id"]."'";
+   $query_delete = "UPDATE member SET p_name = '' WHERE username ='".$_GET["id"]."'";
+   mysqli_query($connect,$query_delete);
+   header("Location:member_grouping.php");
+}
+//////////////////////////////////////////////////////////
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -50,6 +101,12 @@ if(isset($_GET["action"]) && $_GET["action"] == "new" ){
    <![endif]-->   
    </head>
    <body>
+   <script type="text/javascript">
+      function sure(){
+      if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
+      return false ;
+      }
+   </script>
       <nav class="navbar navbar-default" role="navigation">
          <div class="container">
             <!-- Brand and toggle get grouped for better mobile display -->
@@ -170,22 +227,30 @@ if(isset($_GET["action"]) && $_GET["action"] == "new" ){
                      <!-- part 1 -->
                      <div class="panel panel-default">
                         <div class="panel-heading">
-                           <h3 class="panel-title">Member</h3>
+                           <h3 class="panel-title">Member Manage</h3>
                         </div>
                         <div class="panel-body">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+                        <?php if($whoami == 1){ ?>
                         <form action="" method="GET" role="form">
+                        <input name="action" type="hidden" id="action" value="addmember">
+                           <label>Add Member</label>
                            <div class="input-group">
                               <input type="text" class="form-control" placeholder="ID" name="membername">
-                              <input name="action" type="hidden" id="action" value="addmember">
                               <span class="input-group-btn">
                                  <button class="btn btn-primary" type="submit"> Add </button>
                               </span>
                            </div>
+                           <br/>
+                           <?php if($Errlevel == 1){ ?><font color=red><strong>User Doesnt Exist</strong></font><?php }elseif($Errlevel == 0){ ?>
+                              <font color=green><strong>Success</strong></font><?php }?>
                            <!-- /input-group -->
                         </form>
+                        <?php } ?>
+                        <br/>
                         </div>
-                        <!-- /.col-lg-6 -->                        
+                        <!-- /.col-lg-6 -->  
+                        <?php if($project_name != ""){ ?>                  
                            <table class="table">
                                     <thead>
                                        <tr>
@@ -199,20 +264,30 @@ if(isset($_GET["action"]) && $_GET["action"] == "new" ){
                                  <tbody>
                                  <?php $no = 0;
                                  //進入第一層迴圈
-                                 while ($pull_User = @mysqli_fetch_assoc($datapool_User)) {$no++;?>
+                                 $query_friend = "SELECT * FROM member WHERE gup_number ='".$my_group."'";
+                                 $friend = mysqli_query($connect,$query_friend);
+                                 while ($pull_friends = @mysqli_fetch_assoc($friend)) {$no++;?>
                                  <tr>
                                  <!--建立HTML表格的列-->
                                     <td><?php echo $no; ?></td>
-                                    <td><?php echo $pull_User['username']; ?></td>
-                                    <td><?php echo $pull_User['name']; ?></td>
-                                    <td><?php echo $pull_User['email']; ?></td>
+                                    <td><?php echo $pull_friends['username']; ?></td>
+                                    <td><?php echo $pull_friends['name']; ?></td>
+                                    <td><?php echo $pull_friends['email']; ?></td>
                                     <td>
-                                       <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_User['username'] ?>" onclick="return sure();">Delete</a>
+                                    <?php if($whoami == 1){ ?>
+                                    <?php if($my_id == $pull_friends['username']){?>
+                                       <!--Fucker u cant do anything about ur self sorry (LMAO)-->
+                                       <?php }else { ?>
+                                       <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_friends['username'] ?>" onclick="return sure();">Delete</a>
+                                    <?php } ?>
+                                    <?php }else { /*who fucking cares?*/ ?> <strong>Not Leader</strong> <?php } ?> 
                                     </td>
                                  </tr>
                                  <?php /*HTML表格列的結束標記 */}; //第一層迴圈結束?>
+                                 
                                  </tbody>
                            </table>
+                           <?php } ?>
                         </div>
                      </div>
                   <!-- part 2 -->

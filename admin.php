@@ -166,6 +166,37 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 						<div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
 						<div class="panel panel-default">
 							<div class="panel-heading">
+								<h3 class="panel-title">Control</h3>
+							</div>
+							<div class="panel-body">
+								<form action="" method="POST" role="form">
+									<div class="form-group">
+										<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+											<label for="">Is Open?</label>
+											<select class="form-control">
+												<option>Yes</option>
+												<option>No</option>
+											</select>
+										</div>
+										<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+											<label for="">Year</label>
+											<input type="text" class="form-control">
+										</div>
+										<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+											<label for="">Semester</label>
+											<input type="text" class="form-control"">
+										</div>
+										<div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+											<br/>
+											<button type="button" class="btn btn-success">Submit</button>
+										</div>
+									</div>
+									
+								</form>
+							</div>
+						</div>
+						<div class="panel panel-default">
+							<div class="panel-heading">
 								<h3 class="panel-title">Add a Member</h3>
 							</div>
 							<div class="panel-body">
@@ -218,7 +249,7 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
                                  	<td><?php echo $pull_User['gid']; ?></td>
                                  	<td><?php echo $pull_User['email']; ?></td>
                                  	<td>
-                                    	<a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_User['username'] ?>" >Edit</a>
+                                    	<a class="btn btn-success btn-xs" href="admin_edit.php?action=edit&id=<?php echo $pull_User['username'] ?>" >Edit</a>
                                     	<a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_User['username'] ?>" onclick="return sure();">Delete</a>
                                  	</td>
                               	</tr>
@@ -258,7 +289,7 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 											<td><?php echo $pull_Professor['gid']; ?></td>
 											<td><?php echo $pull_Professor['email']; ?></td>
 											<td>
-												<a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_Professor['username'] ?>">Edit</a>
+												<a class="btn btn-success btn-xs" href="admin_edit.php?action=edit&id=<?php echo $pull_Professor['username'] ?>">Edit</a>
 												<a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Professor['username'] ?>" onclick="return sure();">Delete</a>
 											</td>
 										</tr>
@@ -297,7 +328,7 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 											<td><?php echo $pull_Admin['gid']; ?></td>
 											<td><?php echo $pull_Admin['email']; ?></td>
 											<td>
-												<a class="btn btn-success btn-xs" href="admin_add.php?action=edit&id=<?php echo $pull_Admin['username'] ?>" >Edit</a>
+												<a class="btn btn-success btn-xs" href="admin_edit.php?action=edit&id=<?php echo $pull_Admin['username'] ?>" >Edit</a>
 												<a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_Admin['username'] ?>" onclick="return sure();">Delete</a>
 											</td>
 										</tr>
