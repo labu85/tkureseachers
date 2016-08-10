@@ -24,6 +24,7 @@ $my_id = $pull_all["username"];
 $pkey = $pull_all["id"];
 $project_name = $pull_all["p_name"];
 $my_group = $pull_all["gup_number"];
+$this_year = $pull_all["year"];
 //lmao who am i lmao
 //# whoami
 //>_CHEN MING TSE 
@@ -52,7 +53,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "new" ){
 $Errlevel = -1;
 if(isset($_GET["membername"]) && $_GET["membername"] != ""){
    if(isset($_GET["action"]) && $_GET["action"] == "addmember" ){
-      $query_get = "SELECT * FROM member WHERE username ='".$_GET["membername"]."'";
+      $query_get = "SELECT * FROM member WHERE username ='".$_GET["membername"]."' AND year ='".$this_year."'";
       $result = mysqli_query($connect,$query_get);
          if(mysqli_num_rows($result) > 0){
             $Errlevel = 0;
@@ -71,8 +72,9 @@ if(!isset($_GET["membername"]))
 //////////////////////////////////////////////////////////
 if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
    $query_delete = "UPDATE member SET gup_number = '0' WHERE username ='".$_GET["id"]."'";
-   $query_delete = "UPDATE member SET p_name = '' WHERE username ='".$_GET["id"]."'";
+   $query_delete_pname = "UPDATE member SET p_name = '' WHERE username ='".$_GET["id"]."'";
    mysqli_query($connect,$query_delete);
+   mysqli_query($connect,$query_delete_pname);
    header("Location:member_grouping.php");
 }
 //////////////////////////////////////////////////////////
