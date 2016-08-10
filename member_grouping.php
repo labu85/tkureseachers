@@ -1,7 +1,7 @@
 <?php 
 // todo
 // There are many redundant sql query maybe can do it all by one time ex pre-process
-// 
+// Prrevent each group has the same people or over write
 ?>
 <?php
 require_once('connect.php');
@@ -38,7 +38,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "new" ){
    $query_insert = "UPDATE member SET p_name = '".$_GET["pname"]."' , is_leader = '1' WHERE id ='".$pkey."'";
    mysqli_query($connect,$query_insert);
       ///assign group/////////////////////////////////////////////////////////////////////
-      $query_getindex = "SELECT * FROM member WHERE gup_number != 0";
+      $query_getindex = "SELECT * FROM member WHERE gup_number != 0 AND year ='".$this_year."'";
       $index = mysqli_query($connect,$query_getindex);
       $row = mysqli_num_rows($index);
       $assign_gnum = ++$row;
@@ -58,9 +58,9 @@ if(isset($_GET["membername"]) && $_GET["membername"] != ""){
          if(mysqli_num_rows($result) > 0){
             $Errlevel = 0;
             $query_setgroupuser = "UPDATE member SET gup_number ='".$my_group."' WHERE username ='".$_GET["membername"]."'";
-            $query_setgroupproject = "UPDATE member SET p_name ='".$project_name."' WHERE username ='".$_GET["membername"]."'";
+            $query_setgroup_project = "UPDATE member SET p_name ='".$project_name."' WHERE username ='".$_GET["membername"]."'";
             mysqli_query($connect,$query_setgroupuser);
-            mysqli_query($connect,$query_setgroupproject);
+            mysqli_query($connect,$query_setgroup_project);
             header("Location:member_grouping.php");
          }else{
             $Errlevel = 1;
@@ -137,6 +137,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                         </li>
                      </ul>
                   </li>
+                  <!--some surgerys here -->
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-plus"></i><b class="caret"></b></a>
                      <ul class="dropdown-menu">
@@ -148,7 +149,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                         </li>
                      </ul>
                   </li>
-
+                  <!--some surgerys here -->
                   <li class="dropdown">
                      <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user">&nbsp;</i>
                         <?php echo $identity; ?> <b class="caret"></b>
@@ -266,7 +267,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                                  <tbody>
                                  <?php $no = 0;
                                  //進入第一層迴圈
-                                 $query_friend = "SELECT * FROM member WHERE gup_number ='".$my_group."'";
+                                 $query_friend = "SELECT * FROM member WHERE gup_number ='".$my_group."' AND year ='".$this_year."'";
                                  $friend = mysqli_query($connect,$query_friend);
                                  while ($pull_friends = @mysqli_fetch_assoc($friend)) {$no++;?>
                                  <tr>
