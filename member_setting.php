@@ -90,7 +90,7 @@ $identity = $pull_all["name"];
                         </li>
                         <li class="divider"></li>
                         <li>
-                           <a href="member_setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                           <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li>
                            <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -104,7 +104,27 @@ $identity = $pull_all["name"];
         </nav>
             <div class="container">
                 <div class="row">
-                
+                    <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+                        <div class="panel panel-default">
+                            <!-- Default panel contents -->            
+                            <div class="panel-heading"> <strong>Toolbox</strong>
+                            </div>
+                            <div class="list-group">
+                                <a href="member_grouping.php" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Set up a Group</a>
+                                <a href="member_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
+                                <a href="member_score.php" class="list-group-item"><i class="fa fa-area-chart" aria-hidden="true"></i> Score</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h3 class="panel-title">Group</h3>
+                            </div>
+                            <div class="panel-body">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
          <!-- jQuery -->
