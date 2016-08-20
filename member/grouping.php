@@ -181,8 +181,6 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                         </div>
                         <div class="list-group">
                            <a href="member_grouping.php" class="list-group-item list-group-item-info"> <i class="fa fa-list-alt" aria-hidden="true"></i> Set up a Group</a>
-                           <a href="member_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
-                           <a href="member_score.php" class="list-group-item"><i class="fa fa-area-chart" aria-hidden="true"></i> Score</a>
                         </div>
                      </div>
                   </div>

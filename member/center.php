@@ -1,5 +1,5 @@
 <?php
-require_once("connect.php");
+require_once('connect.php');
 session_start();
 if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="")){
     header("Location:index.php");
@@ -104,7 +104,7 @@ $identity = $pull_all["name"];
         </nav>
             <div class="container">
                 <div class="row">
-
+                
                 </div>
             </div>
          <!-- jQuery -->
