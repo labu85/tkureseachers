@@ -1,22 +1,22 @@
-<?php 
+<?php
 // todo
 // There are many redundant sql query maybe can do it all by one time ex pre-process
 // Prevent each group has the same people or over write
 ?>
 <?php
-require_once('connect.php');
+require_once '../connect.php';
 session_start();
-if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="")){
-    header("Location:index.php");
+if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "")) {
+	header("Location:index.php");
 }
-if(isset($_GET["logout"]) && ($_GET["logout"] == "true")){
-unset($_SESSION["u_login"]);
-unset($_SESSION["Level"]);
-header("Location:index.php");
+if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
+	unset($_SESSION["u_login"]);
+	unset($_SESSION["Level"]);
+	header("Location:index.php");
 }
 //pull user name
-$query_pullMember = "SELECT * FROM member WHERE username ='".$_SESSION["u_login"]."'";
-$datapool = mysqli_query($connect,$query_pullMember);
+$query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "'";
+$datapool = mysqli_query($connect, $query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
@@ -27,80 +27,88 @@ $my_group = $pull_all["gup_number"];
 $this_year = $pull_all["year"];
 //lmao who am i lmao
 //# whoami
-//>_CHEN MING TSE 
+//>_CHEN MING TSE
 //any questions?
 $whoami = $pull_all["is_leader"];
-if($project_name != ""){
-   $project_isset = 1;
-}else $project_isset = 0;
+if ($project_name != "") {
+	$project_isset = 1;
+} else {
+	$project_isset = 0;
+}
+
 //////////////////////////////////////////////////////////
-if(isset($_GET["action"]) && $_GET["action"] == "new" ){
-   $query_insert = "UPDATE member SET p_name = '".$_GET["pname"]."' , is_leader = '1' WHERE id ='".$pkey."'";
-   mysqli_query($connect,$query_insert);
-      ///assign group/////////////////////////////////////////////////////////////////////
-      $query_getindex = "SELECT * FROM member WHERE gup_number != 0 AND year ='".$this_year."'";
-      $index = mysqli_query($connect,$query_getindex);
-      $row = mysqli_num_rows($index);
-      $assign_gnum = ++$row;
-      $query_setgroup = "UPDATE member SET gup_number ='".$assign_gnum."' WHERE id ='".$pkey."'";
-      mysqli_query($connect,$query_setgroup);
-      /////////////////////////////////////////////////////////////////////////////////////
-   $query_project_regist = "INSERT INTO project (project_name) VALUES ('".$_GET["pname"]."')";
-      mysqli_query($connect,$query_project_regist);
-      header("Location:member_grouping.php");
+if (isset($_GET["action"]) && $_GET["action"] == "new") {
+	$query_insert = "UPDATE member SET p_name = '" . $_GET["pname"] . "' , is_leader = '1' WHERE id ='" . $pkey . "'";
+	mysqli_query($connect, $query_insert);
+	///assign group/////////////////////////////////////////////////////////////////////
+	$query_getindex = "SELECT * FROM member WHERE gup_number != 0 AND year ='" . $this_year . "'";
+	$index = mysqli_query($connect, $query_getindex);
+	$row = mysqli_num_rows($index);
+	$assign_gnum = ++$row;
+	$query_setgroup = "UPDATE member SET gup_number ='" . $assign_gnum . "' WHERE id ='" . $pkey . "'";
+	mysqli_query($connect, $query_setgroup);
+	/////////////////////////////////////////////////////////////////////////////////////
+	$query_project_regist = "INSERT INTO project (project_name) VALUES ('" . $_GET["pname"] . "')";
+	mysqli_query($connect, $query_project_regist);
+	header("Location:member_grouping.php");
 }
 //////////////////////////////////////////////////////////
 $Errlevel = -1;
-if(isset($_GET["membername"]) && $_GET["membername"] != ""){
-   if(isset($_GET["action"]) && $_GET["action"] == "addmember" ){
-      $query_get = "SELECT * FROM member WHERE username ='".$_GET["membername"]."' AND year ='".$this_year."'";
-      $result = mysqli_query($connect,$query_get);
-         if(mysqli_num_rows($result) > 0){
-            $Errlevel = 0;
-            $query_setgroupuser = "UPDATE member SET gup_number ='".$my_group."' WHERE username ='".$_GET["membername"]."'";
-            $query_setgroup_project = "UPDATE member SET p_name ='".$project_name."' WHERE username ='".$_GET["membername"]."'";
-            mysqli_query($connect,$query_setgroupuser);
-            mysqli_query($connect,$query_setgroup_project);
-            header("Location:member_grouping.php");
-         }else{
-            $Errlevel = 1;
-      }
-   }
-}else $Errlevel = 1;
-if(!isset($_GET["membername"]))
-   $Errlevel = -1;
+if (isset($_GET["membername"]) && $_GET["membername"] != "") {
+	if (isset($_GET["action"]) && $_GET["action"] == "addmember") {
+		$query_get = "SELECT * FROM member WHERE username ='" . $_GET["membername"] . "' AND year ='" . $this_year . "'";
+		$result = mysqli_query($connect, $query_get);
+		if (mysqli_num_rows($result) > 0) {
+			$Errlevel = 0;
+			$query_setgroupuser = "UPDATE member SET gup_number ='" . $my_group . "' WHERE username ='" . $_GET["membername"] . "'";
+			$query_setgroup_project = "UPDATE member SET p_name ='" . $project_name . "' WHERE username ='" . $_GET["membername"] . "'";
+			mysqli_query($connect, $query_setgroupuser);
+			mysqli_query($connect, $query_setgroup_project);
+			header("Location:member_grouping.php");
+		} else {
+			$Errlevel = 1;
+		}
+	}
+} else {
+	$Errlevel = 1;
+}
+
+if (!isset($_GET["membername"])) {
+	$Errlevel = -1;
+}
+
 //////////////////////////////////////////////////////////
-if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
-   $query_delete = "UPDATE member SET gup_number = '0' WHERE username ='".$_GET["id"]."'";
-   $query_delete_pname = "UPDATE member SET p_name = '' WHERE username ='".$_GET["id"]."'";
-   mysqli_query($connect,$query_delete);
-   mysqli_query($connect,$query_delete_pname);
-   header("Location:member_grouping.php");
+if (isset($_GET["action"]) && $_GET["action"] == "delete") {
+	$query_delete = "UPDATE member SET gup_number = '0' WHERE username ='" . $_GET["id"] . "'";
+	$query_delete_pname = "UPDATE member SET p_name = '' WHERE username ='" . $_GET["id"] . "'";
+	mysqli_query($connect, $query_delete);
+	mysqli_query($connect, $query_delete_pname);
+	header("Location:member_grouping.php");
 }
 //////////////////////////////////////////////////////////
 ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
-   <meta charset="utf-8">  
-   <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
-   <meta name="viewport" content="width=device-width, initial-scale=1"> 
-   <meta name="description" content="">   
-   <meta name="author" content="">  
+   <meta charset="utf-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+   <meta name="description" content="">
+   <meta name="author" content="">
    <title>Admin</title>
-   <!-- Bootstrap Core CSS -->   
-   <link href="css/bootstrap.min.css" rel="stylesheet">  
-   <!-- Custom CSS -->  
-   <!-- <link href="css/sb-admin.css" rel="stylesheet">  
+   <!-- Bootstrap Core CSS -->
+   <link href="../css/bootstrap.min.css" rel="stylesheet">
+   <!-- Custom CSS -->
+   <!-- <link href="../css/sb-admin.css" rel="stylesheet">
    -->
-   <!-- Custom Fonts -->   
-   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">   
-   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->  
-   <!-- WARNING: Respond.js doesn't work if you view the page via file:// --> 
-   <!--[if lt IE 9]> 
+   <!-- Custom Fonts -->
+   <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   <!--[if lt IE 9]>
    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-   <![endif]-->   
+   <![endif]-->
    </head>
    <body>
    <script type="text/javascript">
@@ -119,9 +127,9 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="#">Title</a>
+               <a class="navbar-brand" href="center.php">Title</a>
             </div>
-            
+
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
                <form class="navbar-form navbar-left" role="search">
@@ -134,18 +142,6 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                      <ul class="dropdown-menu">
                         <li>
                            <a href="#"></a>
-                        </li>
-                     </ul>
-                  </li>
-                  <!--some surgerys here -->
-                  <li class="dropdown">
-                     <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-plus"></i><b class="caret"></b></a>
-                     <ul class="dropdown-menu">
-                        <li>
-                           <a href="#"><i class="fa fa-user-plus" aria-hidden="true"></i> Setup Groups</a>
-                        </li>
-                        <li>
-                           <a href="#"><i class="fa fa-upload"></i> Upload Files</a>
                         </li>
                      </ul>
                   </li>
@@ -169,14 +165,14 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                   </li>
                </ul>
             </div>
-            <!-- /.navbar-collapse -->          
+            <!-- /.navbar-collapse -->
             </div>
          </nav>
             <div class="container">
                <div class="row">
                   <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
                      <div class="panel panel-default">
-                        <!-- Default panel contents -->            
+                        <!-- Default panel contents -->
                         <div class="panel-heading"> <strong>Toolbox</strong>
                         </div>
                         <div class="list-group">
@@ -184,27 +180,27 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                         </div>
                      </div>
                   </div>
-                  
+
                   <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
                      <div class="panel panel-default">
                         <div class="panel-heading">
                            <h3 class="panel-title">Group</h3>
                         </div>
                         <div class="panel-body">
-                        <?php  if($project_isset == 1){?>
+                        <?php if ($project_isset == 1) {?>
                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                               <form action="" method="GET" role="form">
                                  <div class="form-group">
                                     <label>Project Name</label>
                                     <font color="red"><strong>Already Setup !</strong></font>
-                                    <input type="text" class="form-control " disabled="disabled" value="<?php echo $project_name ;?>">
+                                    <input type="text" class="form-control " disabled="disabled" value="<?php echo $project_name; ?>">
                                  </div>
 
                                  <button type="submit" class="btn btn-primary" id="sbtn">Submit</button>
-                              </form>                              
+                              </form>
                            </div>
-                           <?php } ?>
-                           <?php  if($project_isset == 0){?>
+                           <?php }?>
+                           <?php if ($project_isset == 0) {?>
                            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                               <form action="" method="GET" role="form">
                                  <div class="form-group">
@@ -219,9 +215,9 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                                  </div>
                                  <input name="action" type="hidden" id="action" value="new">
                                  <button type="submit" class="btn btn-primary" id="sbtn">Submit</button>
-                              </form>                              
+                              </form>
                            </div>
-                           <?php } ?>
+                           <?php }?>
                         </div>
                      </div>
                      <!-- part 1 -->
@@ -231,7 +227,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                         </div>
                         <div class="panel-body">
                         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
-                        <?php if($whoami == 1){ ?>
+                        <?php if ($whoami == 1) {?>
                         <form action="" method="GET" role="form">
                         <input name="action" type="hidden" id="action" value="addmember">
                            <label>Add Member</label>
@@ -242,15 +238,16 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                               </span>
                            </div>
                            <br/>
-                           <?php if($Errlevel == 1){ ?><font color=red><strong>User Doesnt Exist</strong></font><?php }elseif($Errlevel == 0){ ?>
+                           <?php if ($Errlevel == 1) {?><font color=red><strong>User Doesnt Exist</strong></font><?php } elseif ($Errlevel == 0) {?>
                               <font color=green><strong>Success</strong></font><?php }?>
                            <!-- /input-group -->
                         </form>
-                        <?php } ?>
+                        <?php }?>
                         <br/>
                         </div>
-                        <!-- /.col-lg-6 -->  
-                        <?php if($project_name != ""){ ?>                  
+                        <!-- /.col-lg-6 -->
+                        <?php if ($project_name != "") {
+	?>
                            <table class="table">
                                     <thead>
                                        <tr>
@@ -263,10 +260,10 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                                     </thead>
                                  <tbody>
                                  <?php $no = 0;
-                                 //進入第一層迴圈
-                                 $query_friend = "SELECT * FROM member WHERE gup_number ='".$my_group."' AND year ='".$this_year."'";
-                                 $friend = mysqli_query($connect,$query_friend);
-                                 while ($pull_friends = @mysqli_fetch_assoc($friend)) {$no++;?>
+	//進入第一層迴圈
+	$query_friend = "SELECT * FROM member WHERE gup_number ='" . $my_group . "' AND year ='" . $this_year . "'";
+	$friend = mysqli_query($connect, $query_friend);
+	while ($pull_friends = @mysqli_fetch_assoc($friend)) {$no++;?>
                                  <tr>
                                  <!--建立HTML表格的列-->
                                     <td><?php echo $no; ?></td>
@@ -274,20 +271,21 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
                                     <td><?php echo $pull_friends['name']; ?></td>
                                     <td><?php echo $pull_friends['email']; ?></td>
                                     <td>
-                                    <?php if($whoami == 1){ ?>
-                                    <?php if($my_id == $pull_friends['username']){?>
+                                    <?php if ($whoami == 1) {?>
+                                    <?php if ($my_id == $pull_friends['username']) {?>
                                        <!--Fucker u cant do anything about ur self sorry (LMAO)-->
-                                       <?php }else { ?>
+                                       <?php } else {?>
                                        <a class="btn btn-danger btn-xs" href="?action=delete&id=<?php echo $pull_friends['username'] ?>" onclick="return sure();">Delete</a>
-                                    <?php } ?>
-                                    <?php }else { /*who fucking cares?*/ ?> <strong>Not Leader</strong> <?php } ?> 
+                                    <?php }?>
+                                    <?php } else { /*who fucking cares?*/?> <strong>Not Leader</strong> <?php }?>
                                     </td>
                                  </tr>
-                                 <?php /*HTML表格列的結束標記 */}; //第一層迴圈結束?>
-                                 
+                                 <?php /*HTML表格列的結束標記 */}
+	; //第一層迴圈結束?>
+
                                  </tbody>
                            </table>
-                           <?php } ?>
+                           <?php }?>
                         </div>
                      </div>
                   <!-- part 2 -->
@@ -302,7 +300,7 @@ if(isset($_GET["action"]) && $_GET["action"] == "delete" ){
             }else{
                document.getElementById("sbtn").disabled = true;
             }
-         }                   
+         }
          </script>
          <!-- jQuery -->
          <script src="js/jquery.js"></script>
