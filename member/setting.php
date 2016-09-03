@@ -2,12 +2,12 @@
 require_once '../connect.php';
 session_start();
 if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "")) {
-	header("Location:index.php");
+   header("Location:index.php");
 }
 if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
-	unset($_SESSION["u_login"]);
-	unset($_SESSION["Level"]);
-	header("Location:index.php");
+   unset($_SESSION["u_login"]);
+   unset($_SESSION["Level"]);
+   header("Location:index.php");
 }
 //pull user name
 $query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
@@ -71,18 +71,24 @@ $identity = $pull_all["name"];
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user">&nbsp;</i>
                            <?php echo $identity; ?> <b class="caret"></b>
                         </a>
-                        <ul class="dropdown-menu">
-                           <li>
-                              <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
-                           </li>
-                           <li class="divider"></li>
-                           <li>
-                              <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                           </li>
-                           <li>
-                              <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                           </li>
-                        </ul>
+                        <!-- Sync start -->
+                        <li class="dropdown">
+                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user">&nbsp;</i>
+                              <?php echo $identity; ?> <b class="caret"></b>
+                           </a>
+                           <ul class="dropdown-menu">
+                              <li>
+                                 <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
+                              </li>
+                              <li>
+                                 <a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                              </li>
+                              <li>
+                                 <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                              </li>
+                           </ul>
+                        </li>
+                        <!-- Sync end -->
                      </li>
                   </ul>
                </div>
@@ -97,8 +103,10 @@ $identity = $pull_all["name"];
                      <div class="panel-heading"> <strong>Toolbox</strong>
                      </div>
                      <div class="list-group">
-                        <a href="member_grouping.php" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Set up a Group</a>
-                        <a href="member_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
+                        <a href="#" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Profile</a>
+                        <a href="#" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> Account</a>
+                        <a href="#" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> Emails</a>
+                        <a href="#" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> Notifications</a>
                      </div>
                   </div>
                </div>
@@ -114,8 +122,8 @@ $identity = $pull_all["name"];
             </div>
          </div>
          <!-- jQuery -->
-         <script src="js/jquery.js"></script>
+         <script src="../js/jquery.js"></script>
          <!-- Bootstrap Core JavaScript -->
-         <script src="js/bootstrap.min.js"></script>
+         <script src="../js/bootstrap.min.js"></script>
       </body>
    </html>

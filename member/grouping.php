@@ -139,24 +139,24 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
                            </li>
                         </ul>
                      </li>
-                     <!--some surgerys here -->
+                     <!-- Sync start -->
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user">&nbsp;</i>
                            <?php echo $identity; ?> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
                            <li>
-                              <a href="#"><i class="fa fa-fw fa-user"></i> Profile</a>
+                              <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
                            </li>
-                           <li class="divider"></li>
                            <li>
-                              <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                              <a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
                            </li>
                            <li>
                               <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
                            </li>
                         </ul>
                      </li>
+                      <!-- Sync end -->
                   </ul>
                </div>
                <!-- /.navbar-collapse -->
@@ -241,9 +241,9 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
                            </thead>
                            <tbody>
                               <?php $no = 0;
-                                 //進入第一層迴圈
-                                 $query_friend = "SELECT * FROM member WHERE gup_number ='" . $my_group . "' AND year ='" . $this_year . "'";
-                                 $friend = mysqli_query($connect, $query_friend);
+                              //進入第一層迴圈
+                              $query_friend = "SELECT * FROM member WHERE gup_number ='" . $my_group . "' AND year ='" . $this_year . "'";
+                              $friend = mysqli_query($connect, $query_friend);
                               while ($pull_friends = @mysqli_fetch_assoc($friend)) {$no++;?>
                               <tr>
                                  <!--建立HTML表格的列-->
@@ -283,8 +283,8 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
          }
          </script>
          <!-- jQuery -->
-         <script src="js/jquery.js"></script>
+         <script src="../js/jquery.js"></script>
          <!-- Bootstrap Core JavaScript -->
-         <script src="js/bootstrap.min.js"></script>
+         <script src="../js/bootstrap.min.js"></script>
       </body>
    </html>
