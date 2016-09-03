@@ -2,7 +2,7 @@
 session_start();
 if (isset($_SESSION["u_login"]) && ($_SESSION["u_login"] != "")) {
 	if ($_SESSION["Level"] == 0) {
-		header("Location:member_center.php");
+		header("Location:member/center.php");
 	} elseif ($_SESSION["Level"] == 99) {
 		header("Location:admin.php");
 	}
@@ -53,7 +53,7 @@ if (isset($_SESSION["u_login"]) && ($_SESSION["u_login"] != "")) {
 			}
 			header("Location:success.html");
 			if ($_SESSION["Level"] == 0) {
-				header("Location:member_center.php");
+				header("Location:member/center.php");
 			}
 			if ($_SESSION["Level"] == 99) {
 				header("Location:admin.php");

@@ -52,9 +52,9 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 	$n_name = $_GET["new_name"];
 	$n_gid = $_GET["new_gid"];
 	$n_email = $_GET["new_email"];
-	$Get_Year = (int) date('Y');
-	$This_Year = $Get_Year - 1914;
-	$query_insert = sprintf("INSERT INTO member (username,pwd,name,email,gid,year) VALUES ('%s','%s','%s','%s','%s','%d')", $n_id, md5(makePass(15)), $n_name, $n_email, $n_gid, $This_Year);
+	$Get_Year=(int)date('Y');
+	$This_Year = $Get_Year - 1914 ;
+	$query_insert = sprintf("INSERT INTO member (username,pwd,name,email,gid,year) VALUES ('%s','%s','%s','%s','%s','%d')", $n_id, md5(makePass(15)), $n_name, $n_email, $n_gid,$This_Year);
 	mysqli_query($connect, $query_insert);
 	header("Location: admin.php");
 }
@@ -102,7 +102,7 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 					</button>
 					<a class="navbar-brand" href="#">Title</a>
 				</div>
-
+				
 				<!-- Collect the nav links, forms, and other content for toggling -->
 				<div class="collapse navbar-collapse navbar-ex1-collapse">
 					<form class="navbar-form navbar-left" role="search">
@@ -210,9 +210,9 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
 								</thead>
 								<tbody>
 									<?php
-$no = 0;
-//進入第一層迴圈
-while ($pull_User = @mysqli_fetch_assoc($datapool_User)) {$no++;?>
+									$no = 0;
+									//進入第一層迴圈
+									while ($pull_User = @mysqli_fetch_assoc($datapool_User)) {$no++;?>
 									<tr>
 										<!--建立HTML表格的列-->
 										<td><?php echo $no; ?></td>
@@ -226,10 +226,10 @@ while ($pull_User = @mysqli_fetch_assoc($datapool_User)) {$no++;?>
 										</td>
 									</tr>
 									<?php
-//HTML表格列的結束標記
-}
-; //第一層迴圈結束
-?>
+										//HTML表格列的結束標記
+										}
+										; //第一層迴圈結束
+									?>
 								</tbody>
 							</table>
 						</div>
@@ -250,9 +250,9 @@ while ($pull_User = @mysqli_fetch_assoc($datapool_User)) {$no++;?>
 								</thead>
 								<tbody>
 									<?php
-$no = 0;
-//進入第一層迴圈
-while ($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)) {$no++;?>
+									$no = 0;
+									//進入第一層迴圈
+									while ($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)) {$no++;?>
 									<tr>
 										<!--建立HTML表格的列-->
 										<td><?php echo $no; ?></td>
@@ -266,10 +266,10 @@ while ($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)) {$no++;?>
 										</td>
 									</tr>
 									<?php
-//HTML表格列的結束標記
-}
-; //第一層迴圈結束
-?></tbody>
+									//HTML表格列的結束標記
+									}
+									; //第一層迴圈結束
+								?></tbody>
 							</table>
 						</div>
 						<div class="panel panel-default">
@@ -289,9 +289,9 @@ while ($pull_Professor = @mysqli_fetch_assoc($datapool_Professor)) {$no++;?>
 								</thead>
 								<tbody>
 									<?php
-$no = 0;
-//進入第一層迴圈
-while ($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)) {$no++;?>
+									$no = 0;
+									//進入第一層迴圈
+									while ($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)) {$no++;?>
 									<tr>
 										<!--建立HTML表格的列-->
 										<td><?php echo $no; ?></td>
@@ -305,9 +305,9 @@ while ($pull_Admin = @mysqli_fetch_assoc($datapool_Admin)) {$no++;?>
 										</td>
 									</tr>
 									<?php
-//HTML表格列的結束標記
-}
-; //第一層迴圈結束?>
+									//HTML表格列的結束標記
+									}
+									; //第一層迴圈結束?>
 								</tbody>
 							</table>
 						</div>
