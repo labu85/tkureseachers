@@ -7,7 +7,7 @@ if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "")) {
 if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
    unset($_SESSION["u_login"]);
    unset($_SESSION["Level"]);
-   header("Location:index.php");
+   header("Location:../index.php");
 }
 //pull user name
 $query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
@@ -24,7 +24,7 @@ $identity = $pull_all["name"];
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description" content="">
       <meta name="author" content="">
-      <title>Admin</title>
+      <title>SPUSS</title>
       <!-- Bootstrap Core CSS -->
       <link href="../css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom CSS -->
@@ -50,7 +50,7 @@ $identity = $pull_all["name"];
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="center.php">Title</a>
+               <a class="navbar-brand" href="center.php">SPUSS</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -84,7 +84,7 @@ $identity = $pull_all["name"];
                            </li>
                         </ul>
                      </li>
-                      <!-- Sync end -->
+                     <!-- Sync end -->
                   </ul>
                </div>
                <!-- /.navbar-collapse -->
@@ -92,6 +92,16 @@ $identity = $pull_all["name"];
          </nav>
          <div class="container">
             <div class="row">
+               <div class="col-lg-6 col-md-offset-3" >
+                  <form>
+                     <div class="form-group">
+                        <label for="exampleInputFile">File input</label>
+                        <input type="file" id="exampleInputFile">
+                        <p class="help-block">Example block-level help text here.</p>
+                     </div>
+                     <button type="submit" class="btn btn-default">Submit</button>
+                  </form>
+               </div>
             </div>
          </div>
          <!-- jQuery -->
