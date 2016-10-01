@@ -146,6 +146,9 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
                         </a>
                         <ul class="dropdown-menu">
                            <li>
+                              <a href="upload.php"><i class="fa fa-fw fa-plus"></i> Uplaod</a>
+                           </li>
+                           <li>
                               <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
                            </li>
                            <li>

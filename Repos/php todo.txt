@@ -1,0 +1,3 @@
+php distingush each year eg. 103 104 105
+next step is to add file upload
+xml to set up global setting

@@ -1,50 +1,43 @@
 <?php
-require_once '../connect.php';
+require_once("connect.php");
 session_start();
-if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "") || ($_SESSION["Level"] != "99")) {
-   header("Location:index.php");
+if(!isset($_SESSION["u_login"]) || ($_SESSION["u_login"]=="")){
+    header("Location:index.php");
 }
-if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
-   unset($_SESSION["u_login"]);
-   unset($_SESSION["Level"]);
-   header("Location:index.php");
+if(isset($_GET["logout"]) && ($_GET["logout"] == "true")){
+unset($_SESSION["u_login"]);
+unset($_SESSION["Level"]);
+header("Location:index.php");
 }
 //pull user name
-$query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
-$datapool = mysqli_query($connect, $query_pullMember);
+$query_pullMember = "SELECT * FROM member WHERE username ='".$_SESSION["u_login"]."';";
+$datapool = mysqli_query($connect,$query_pullMember);
 #pull data to vars
 $pull_all = @mysqli_fetch_assoc($datapool);
 $identity = $pull_all["name"];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
    <head>
-      <meta charset="utf-8">
-      <meta http-equiv="X-UA-Compatible" content="IE=edge">
-      <meta name="viewport" content="width=device-width, initial-scale=1">
-      <meta name="description" content="">
-      <meta name="author" content="">
-      <title>Admin</title>
-      <!-- Bootstrap Core CSS -->
-      <link href="../css/bootstrap.min.css" rel="stylesheet">
-      <!-- Custom CSS -->
-      <!-- <link href="css/sb-admin.css" rel="stylesheet">
-      -->
-      <!-- Custom Fonts -->
-      <link href="../font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-      <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-      <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-      <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-      <![endif]-->
-      <script type="text/javascript">
-         function sure(){
-         if(confirm("This CAN'T UNDO, are you sure to DELETE MEMBER ?")) return true;
-         return false ;
-         }
-      </script>
+   <meta charset="utf-8">  
+   <meta http-equiv="X-UA-Compatible" content="IE=edge"> 
+   <meta name="viewport" content="width=device-width, initial-scale=1"> 
+   <meta name="description" content="">   
+   <meta name="author" content="">  
+   <title>Admin</title>
+   <!-- Bootstrap Core CSS -->   
+   <link href="css/bootstrap.min.css" rel="stylesheet">  
+   <!-- Custom CSS -->  
+   <!-- <link href="css/sb-admin.css" rel="stylesheet">  
+   -->
+   <!-- Custom Fonts -->   
+   <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">   
+   <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->  
+   <!-- WARNING: Respond.js doesn't work if you view the page via file:// --> 
+   <!--[if lt IE 9]> 
+   <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+   <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+   <![endif]-->   
    </head>
    <body>
       <nav class="navbar navbar-default" role="navigation">
@@ -97,7 +90,7 @@ $identity = $pull_all["name"];
                         </li>
                         <li class="divider"></li>
                         <li>
-                           <a href="#"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                           <a href="member_setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
                         </li>
                         <li>
                            <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
@@ -108,29 +101,15 @@ $identity = $pull_all["name"];
             </div>
             <!-- /.navbar-collapse -->          
             </div>
-         </nav>
+        </nav>
             <div class="container">
-               <div class="row">
-                  <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                     <div class="panel panel-default">
-                        <!-- Default panel contents -->            
-                        <div class="panel-heading"> <strong>Toolbox</strong></div>
-                        <div class="list-group">
-                           <a href="admin.php" class="list-group-item"> <i class="fa fa-user-md" aria-hidden="true"></i> Member</a>
-                           <a href="admin_group.php" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Group</a>
-                           <a href="admin_file.php" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> File</a>
-                           <a href="admin_score.php" class="list-group-item"><i class="fa fa-area-chart" aria-hidden="true"></i> Score</a>
-                        </div>
-                     </div>
-                  </div>
-                  <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
-                     something
-                  </div>
-               </div>
+                <div class="row">
+
+                </div>
             </div>
          <!-- jQuery -->
-         <script src="../js/jquery.js"></script>
+         <script src="js/jquery.js"></script>
          <!-- Bootstrap Core JavaScript -->
-         <script src="../js/bootstrap.min.js"></script>
+         <script src="js/bootstrap.min.js"></script>
       </body>
    </html>

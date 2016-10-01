@@ -74,6 +74,9 @@ $identity = $pull_all["name"];
                         </a>
                         <ul class="dropdown-menu">
                            <li>
+                              <a href="upload.php"><i class="fa fa-fw fa-plus"></i> Uplaod</a>
+                           </li>
+                           <li>
                               <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
                            </li>
                            <li>
@@ -93,14 +96,7 @@ $identity = $pull_all["name"];
          <div class="container">
             <div class="row">
                <div class="col-lg-6 col-md-offset-3" >
-                  <form>
-                     <div class="form-group">
-                        <label for="exampleInputFile">File input</label>
-                        <input type="file" id="exampleInputFile">
-                        <p class="help-block">Example block-level help text here.</p>
-                     </div>
-                     <button type="submit" class="btn btn-default">Submit</button>
-                  </form>
+                  something goes here
                </div>
             </div>
          </div>
