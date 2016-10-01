@@ -4,7 +4,7 @@ if (isset($_SESSION["u_login"]) && ($_SESSION["u_login"] != "")) {
 	if ($_SESSION["Level"] == 0) {
 		header("Location:member/center.php");
 	} elseif ($_SESSION["Level"] == 99) {
-		header("Location:admin.php");
+		header("Location:admin/admin.php");
 	}
 }
 ?>
@@ -56,7 +56,7 @@ if (isset($_SESSION["u_login"]) && ($_SESSION["u_login"] != "")) {
 				header("Location:member/center.php");
 			}
 			if ($_SESSION["Level"] == 99) {
-				header("Location:admin.php");
+				header("Location:admin/admin.php");
 			}
 		}
 		if (md5($_POST["password"]) != $pwd) {

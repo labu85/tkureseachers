@@ -36,7 +36,7 @@ $identity = $pull_all["name"];
       <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
       <!--[if lt IE 9]>
       <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/repond.min.js"></script>
       <![endif]-->
    </head>
    <body>
@@ -67,32 +67,27 @@ $identity = $pull_all["name"];
                            </li>
                         </ul>
                      </li>
+                     <!-- Sync start -->
                      <li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user">&nbsp;</i>
                            <?php echo $identity; ?> <b class="caret"></b>
                         </a>
-                        <!-- Sync start -->
-                        <li class="dropdown">
-                           <a href="#" class="dropdown-toggle" data-toggle="dropdown"> <i class="fa fa-user">&nbsp;</i>
-                              <?php echo $identity; ?> <b class="caret"></b>
-                           </a>
-                           <ul class="dropdown-menu">
-                              <li>
+                        <ul class="dropdown-menu">
+                           <li>
                               <a href="upload.php"><i class="fa fa-fw fa-plus"></i> Uplaod</a>
-                              </li>
-                              <li>
-                                 <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
-                              </li>
-                              <li>
-                                 <a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
-                              </li>
-                              <li>
-                                 <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                              </li>
-                           </ul>
-                        </li>
-                        <!-- Sync end -->
+                           </li>
+                           <li>
+                              <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
+                           </li>
+                           <li>
+                              <a href="setting.php"><i class="fa fa-fw fa-gear"></i> Settings</a>
+                           </li>
+                           <li>
+                              <a href="?logout=true"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
+                           </li>
+                        </ul>
                      </li>
+                     <!-- Sync end -->
                   </ul>
                </div>
                <!-- /.navbar-collapse -->
@@ -100,25 +95,13 @@ $identity = $pull_all["name"];
          </nav>
          <div class="container">
             <div class="row">
-               <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
-                  <div class="panel panel-default">
-                     <!-- Default panel contents -->
-                     <div class="panel-heading"> <strong>Toolbox</strong>
-                     </div>
-                     <div class="list-group">
-                        <a href="#" class="list-group-item"> <i class="fa fa-list-alt" aria-hidden="true"></i> Profile</a>
-                        <a href="#" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> Account</a>
-                        <a href="#" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> Emails</a>
-                        <a href="#" class="list-group-item"><i class="fa fa-file" aria-hidden="true"></i> Notifications</a>
-                     </div>
-                  </div>
-               </div>
-               <div class="col-xs-9 col-sm-9 col-md-9 col-lg-9">
+               <div class="col-lg-8 col-md-offset-2" >
                   <div class="panel panel-default">
                      <div class="panel-heading">
-                        <h3 class="panel-title">Group</h3>
+                        <h3 class="panel-title"><b>File Uplaod</b></h3>
                      </div>
                      <div class="panel-body">
+                        Uploader Here
                      </div>
                   </div>
                </div>

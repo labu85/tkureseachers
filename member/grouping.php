@@ -12,7 +12,7 @@ if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "")) {
 if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
    unset($_SESSION["u_login"]);
    unset($_SESSION["Level"]);
-   header("Location:index.php");
+   header("Location:../index.php");
 }
 //pull user name
 $query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "'";
@@ -90,7 +90,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="description" content="">
       <meta name="author" content="">
-      <title>Admin</title>
+      <title>SPUSS</title>
       <!-- Bootstrap Core CSS -->
       <link href="../css/bootstrap.min.css" rel="stylesheet">
       <!-- Custom CSS -->
@@ -122,7 +122,7 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
                <span class="icon-bar"></span>
                <span class="icon-bar"></span>
                </button>
-               <a class="navbar-brand" href="center.php">Title</a>
+               <a class="navbar-brand" href="center.php">SPUSS</a>
             </div>
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse navbar-ex1-collapse">
@@ -145,6 +145,9 @@ if (isset($_GET["action"]) && $_GET["action"] == "delete") {
                            <?php echo $identity; ?> <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
+                           <li>
+                              <a href="upload.php"><i class="fa fa-fw fa-plus"></i> Uplaod</a>
+                           </li>
                            <li>
                               <a href="grouping.php"><i class="fa fa-fw fa-group"></i> Group</a>
                            </li>
