@@ -1,8 +1,16 @@
 <?php 
-$target_dir = "Repos/";
-$target_path = $target_dir . basename($_FILES['fileToUpload']['name']);
-move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_path);
-echo $_SERVER['PATH_TRANSLATED'];
+$target_dir = "C:/xampp/htdocs/tkureseachers/Repos/";
+$target_file = $target_dir . basename($_FILES["fileToUpload"]["name"]);
+//$target_path = $target_dir . basename($_FILES['fileToUpload']['name']);
+//move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_path);
+//echo $_SERVER['PATH_TRANSLATED'];
+echo "The file ". basename( $_FILES["fileToUpload"]["name"]). " has been uploaded.";
+move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file);
+if(isset($_POST["fileToUpload"])) {
+    if (move_uploaded_file($_FILES["fileToUpload"]["tmp_name"], $target_file)) {
+        
+	}
+}
 ?>
 <!DOCTYPE html>
 <html>
@@ -13,10 +21,10 @@ echo $_SERVER['PATH_TRANSLATED'];
 		<link rel="stylesheet" href="">
 	</head>
 	<body>
-		<form action="upload.php" method="post" enctype="multipart/form-data">
+		<form action="" method="POST" enctype="multipart/form-data">
 			Select image to upload:
 			<input type="file" name="fileToUpload" id="fileToUpload">
-			<input type="submit" name="" value="">
+			<input type="submit" value="Submit">
 		</form>
 	</body>
 </html>

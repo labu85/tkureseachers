@@ -2,12 +2,12 @@
 require_once '../connect.php';
 session_start();
 if (!isset($_SESSION["u_login"]) || ($_SESSION["u_login"] == "") || ($_SESSION["Level"] != "99")) {
-   header("Location:index.php");
+   header("Location:../index.php");
 }
 if (isset($_GET["logout"]) && ($_GET["logout"] == "true")) {
    unset($_SESSION["u_login"]);
    unset($_SESSION["Level"]);
-   header("Location:index.php");
+   header("Location:../index.php");
 }
 //pull user name
 $query_pullMember = "SELECT * FROM member WHERE username ='" . $_SESSION["u_login"] . "';";
@@ -33,7 +33,7 @@ if (isset($_GET["new_id"]) && $_GET["new_id"] != "") {
    $n_email = $_GET["new_email"];
    $query_update = sprintf("UPDATE member SET gid='%s',name='%s',email='%s' WHERE username='%s'", $n_gid, $n_name, $n_email, $n_id);
    mysqli_query($connect, $query_update);
-   header("Location: admin.php");
+   header("Location:admin.php");
 }
 ?>
 <!DOCTYPE html>
